@@ -1,16 +1,24 @@
 <template>
-  <h2>Hello test</h2>
+  <div class="heading">
+    <h2>
+      Random Videos <span>{{ videos.length - currentVideoIndex }}</span>
+    </h2>
+    <div class="btnContainer">
+      <button v-on:click="previousVideo">Previous</button>
 
-  <div class="vidContainer">
-
-    <iframe id="youtubeContainer" v-bind:src="currentVideoUrl"></iframe>
-
+      <button v-on:click="nextVideo">Next</button>
+    </div>
   </div>
-  <button v-on:click="prevVideo">Previous</button>
-
-  <button v-on:click="nextVideo">Next</button>
-
-
+  <div class="vidContainer">
+    <iframe
+      width="420"
+      height="315"
+      frameborder="0"
+      allowfullscreen
+      id="youtubeContainer"
+      v-bind:src="currentVideoUrl"
+    ></iframe>
+  </div>
 </template>
 
 <script>
@@ -20,7 +28,7 @@ export default {
     return {
       videos: [],
       currentVideoUrl: "",
-      currentVideoIndex:0
+      currentVideoIndex: 0,
     };
   },
   mounted() {
@@ -51,13 +59,13 @@ export default {
 
               self.videos.push({
                 name: "xxx",
-                url: iframe.firstElementChild.getAttribute("src")
+                url: iframe.firstElementChild.getAttribute("src"),
               });
             }
           });
 
           self.currentVideoUrl = self.videos[0].url;
-          console.log("found videos:" + self.videos.length)
+          console.log("found videos:" + self.videos.length);
         }
       } else {
         // What do when the request fails
@@ -65,18 +73,17 @@ export default {
       }
     };
 
-    xhr.open("GET", "https://www.reddit.com/r/videos.json");
+    xhr.open("GET", "https://www.reddit.com/r/videos.json?limit=100");
     xhr.send();
   },
   methods: {
-    previousVideo(){
-      this.currentVideoIndex--
-      this.currentVideoUrl =  this.videos[this.currentVideoIndex].url;
-
+    previousVideo() {
+      this.currentVideoIndex--;
+      this.currentVideoUrl = this.videos[this.currentVideoIndex].url;
     },
     nextVideo() {
       this.currentVideoIndex++;
-      this.currentVideoUrl =  this.videos[this.currentVideoIndex].url;
+      this.currentVideoUrl = this.videos[this.currentVideoIndex].url;
     },
   },
 };
@@ -84,12 +91,49 @@ export default {
 
 <style>
 #app {
+  width: 50%;
+}
+button {
+  background-color: white;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  padding: 0.5rem 1.5rem;
+  margin-right: 1rem;
+  width: 12rem;
+  border: 3px solid black;
+}
+button:hover{
+  transform: scaleX(1px);
+}
+.heading{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.heading h2{
+  color: #acb8cc;
+
 }
 
-#youtubeContainer{
-  width: 1000px;
-  height: 600px;
 
+.vidContainer {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-
+.vidContainer iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 8px;
+}
 </style>
