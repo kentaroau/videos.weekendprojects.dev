@@ -1,3 +1,3 @@
-# Videos WeekendProjects
+# Videos.WeekendProjects
 
 Watch random reddit videos
