@@ -1,3 +1,3 @@
-# videos.weekendprojects.dev
+# Videos WeekendProjects
 
 Watch random reddit videos
