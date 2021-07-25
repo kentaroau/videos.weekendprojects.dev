@@ -1,2 +1,4 @@
-# redditvideos
-Watch reddit videos
+# videos.weekendprojects.dev
+
+Watch random videos
+
