@@ -1,4 +1,3 @@
 # videos.weekendprojects.dev
 
-Watch random videos
-
+Watch random reddit videos
